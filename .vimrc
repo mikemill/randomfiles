@@ -28,7 +28,7 @@ Bundle 'vim-scripts/python.vim'
 " " Language plugins
 Bundle 'fs111/pydoc.vim'
 Bundle 'tpope/vim-markdown'
-" Bundle 'nvie/vim-flake8'
+Bundle 'nvie/vim-flake8'
 Bundle 'pangloss/vim-javascript'
 Bundle 'plasticboy/vim-markdown'
 " Bundle 'oscarh/vimerl'
@@ -77,6 +77,7 @@ set softtabstop=4
 set expandtab
 
 set mouse=a
+set bs=2
 
 set showmatch
 set foldmethod=syntax
@@ -97,9 +98,19 @@ let g:sql_type_default = 'mysql'
 au! FileType python setl nosmartindent
 au! FileType python map <buffer> <S-e> :w<CR>:!/usr/bin/env python %<CR>
 
+" Run flakes8 on save
+autocmd BufWritePost *.py call Flake8()
+
 let g:pydoc_open_cmd = 'vsplit'
+
+let g:flake8_ignore='E221'
 "}}}
 
 " PHP {{{
 filetype plugin indent on
+" }}}
+
+" Unit Testing {{{
+au FileType python nnoremap <leader>ua <esc>:!source bin/activate && nosetests -s -d %:p:.<cr>
+au FileType python nnoremap <leader>uf <esc>:!source bin/activate && nosetests -s -d %:p:. -i <cword><cr>
 " }}}
