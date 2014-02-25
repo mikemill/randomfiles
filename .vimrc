@@ -38,6 +38,9 @@ Bundle 'plasticboy/vim-markdown'
 "***** General ******
 " General options {{{
 
+set noerrorbells visualbell t_vb=
+autocmd GUIEnter * set visualbell t_vb=
+
 set viminfo='10,\"100,:20,%,n~/.viminfo
 set hidden
 set t_Co=256
